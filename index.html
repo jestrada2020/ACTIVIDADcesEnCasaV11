@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taller Guiado Práctico de Pandas en Python</title>
+    <style>
+        /* Estilos CSS (pueden ser los mismos o ligeramente ajustados) */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6; color: #34495e; max-width: 1000px;
+            margin: 0 auto; padding: 20px; background-color: #f7f9f9;
+        }
+        h1, h2, h3 { color: #2c3e50; }
+        h1 {
+            border-bottom: 2px solid #27ae60; /* Verde */
+            padding-bottom: 10px; margin-bottom: 20px; text-align: center;
+        }
+        h2 { color: #1f618d; margin-top: 30px; text-align: center; }
+         h3.section-title {
+             color: #27ae60; /* Verde */
+             margin-top: 40px; border-bottom: 1px solid #abebc6; /* Verde claro */
+             padding-bottom: 5px; font-weight: 600;
+        }
+        .student-info {
+            background-color: #ecf0f1; padding: 15px; border-radius: 5px;
+            margin-bottom: 20px; display: flex; flex-direction: column; gap: 10px;
+        }
+        .student-info input {
+            border: 1px solid #bdc3c7; padding: 8px; border-radius: 4px; font-size: 16px;
+        }
+        .instructions {
+            background-color: #eaf2f8; /* Azul muy claro */
+            padding: 15px; border-left: 4px solid #5dade2; /* Azul claro */
+            margin-bottom: 20px; border-radius: 0 5px 5px 0;
+        }
+        .workshop-step {
+            background-color: white; border: 1px solid #e5e7e9; border-radius: 5px;
+            padding: 20px; margin-bottom: 25px; box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+        }
+        .step-title {
+            font-weight: bold; color: #2c3e50; margin-bottom: 15px; display: flex;
+            justify-content: space-between; align-items: center; font-size: 18px;
+        }
+        .step-description {
+            margin-bottom: 15px; color: #566573; padding: 10px;
+            background-color: #f8f9f9; border-radius: 4px;
+        }
+        .code-container {
+            background-color: #f5f5f5; border: 1px solid #ddd; border-radius: 4px;
+            padding: 15px; font-family: 'Courier New', Courier, monospace; font-size: 15px;
+            position: relative; margin-bottom: 15px; line-height: 1.5;
+            white-space: pre-wrap; overflow-x: auto;
+        }
+        .code-placeholder {
+            background-color: #fff9c4; border: 1px dashed #fbc02d; border-radius: 3px;
+            padding: 0 5px; color: #333; font-weight: normal; display: inline-block; min-width: 20px;
+        }
+        .code-placeholder.correct {
+            background-color: #c8e6c9; border: 1px solid #66bb6a; color: #2e7d32;
+        }
+        .code-placeholder.incorrect {
+            background-color: #ffcdd2; border: 1px solid #ef5350; color: #c62828;
+        }
+        .code-comment { color: #5499c7; font-style: italic; } /* Azul para comentarios */
+        button.action-button {
+             background-color: #27ae60; /* Verde */
+             color: white; border: none; padding: 10px 18px; border-radius: 4px;
+             cursor: pointer; font-size: 15px; margin-top: 10px; transition: background-color 0.3s;
+             display: inline-block; margin-left: 0; margin-right: 10px;
+        }
+         button.action-button:hover { background-color: #1e8449; } /* Verde más oscuro */
+        .feedback-area { margin-top: 10px; padding: 8px; border-radius: 4px; min-height: 20px; font-size: 0.95em;}
+        .feedback-area.correct-feedback { background-color: #e8f8f5; border-left: 3px solid #1abc9c; }
+        .feedback-area.incorrect-feedback { background-color: #fdebd0; border-left: 3px solid #f39c12; }
+        .feedback-area strong { font-weight: 600; }
+        .hidden { display: none; }
+        .dataframe-example { background-color: #f8f9f9; border: 1px solid #d6dbdf; padding: 8px; margin-bottom: 10px; font-family: monospace; white-space: pre; font-size: 0.9em; }
+    </style>
+</head>
+<body>
+    <h1>Taller Guiado Práctico de Pandas en Python</h1>
+    <h2>Refuerza tus Habilidades con Nuevos Ejercicios</h2>
+
+    <div class="student-info">
+        <div><label for="nombre"><strong>Nombre (Opcional):</strong></label><input type="text" id="nombre" placeholder="Ingresa tu nombre"></div>
+        <div><label for="apellidos"><strong>Apellidos (Opcional):</strong></label><input type="text" id="apellidos" placeholder="Ingresa tus apellidos"></div>
+    </div>
+
+    <div class="instructions">
+        <h3>¡Bienvenido/a a la Segunda Parte del Taller!</h3>
+        <ul>
+            <li>Continuaremos practicando Pandas con **nuevos ejemplos y situaciones**.</li>
+            <li>Completa los <strong>espacios en blanco</strong> (<span class="code-placeholder">[...]</span>) y usa <strong>"Comprobar Paso"</strong> para verificar y aprender.</li>
+            <li>Recuerda usar el alias `pd` y prestar atención a la sintaxis.</li>
+            <li>¡Sigue practicando para afianzar tu manejo de DataFrames!</li>
+        </ul>
+    </div>
+
+    <div id="workshop-steps-container">
+
+        <h3 class="section-title">1. Preparación y Creación de DataFrames</h3>
+
+        <div class="workshop-step" id="step1"><div class="step-title">Paso 1: Importar Pandas</div><div class="step-description">Como siempre, empezamos importando la librería Pandas.</div><div class="code-container"><pre><span class="code-placeholder" id="step1-part1" contenteditable="true">[...]</span> pandas <span class="code-placeholder" id="step1-part2" contenteditable="true">[...]</span> pd <span class="code-comment"># Rellena: Importación estándar</span>
+print("Librería Pandas cargada.")</pre></div><button class="action-button" onclick="checkStep(1)">Comprobar Paso</button><div id="step1-feedback" class="feedback-area"></div></div>
+
+        <div class="workshop-step" id="step2"><div class="step-title">Paso 2: Datos de Inventario (Diccionario)</div><div class="step-description">Define un diccionario con datos de inventario de productos electrónicos.</div><div class="code-container"><pre>inventario_dict = {
+    'ProductoID': ['E001', 'E002', 'E003', 'E004'],
+    'Nombre': ['Laptop Pro', 'Teclado RGB', 'Monitor 4K', 'Webcam HD'],
+    'Stock': [25, 150, 40, 80],
+    'PrecioUnitario': [1200.50, 75.99, 450.00, 49.90]
+}
+<span class="code-placeholder" id="step2-part1" contenteditable="true">[...]</span>(inventario_dict['Nombre']) <span class="code-comment"># Rellena: Imprime solo la lista de nombres para verificar</span></pre></div><button class="action-button" onclick="checkStep(2)">Comprobar Paso</button><div id="step2-feedback" class="feedback-area"></div></div>
+
+        <div class="workshop-step" id="step3"><div class="step-title">Paso 3: Crear DataFrame de Inventario</div><div class="step-description">Crea un DataFrame llamado `df_inventario` a partir del diccionario `inventario_dict`.</div><div class="code-container"><pre>import pandas as pd
+inventario_dict = {'ProductoID': ['E001', 'E002', 'E003', 'E004'],'Nombre': ['Laptop Pro', 'Teclado RGB', 'Monitor 4K', 'Webcam HD'],'Stock': [25, 150, 40, 80],'PrecioUnitario': [1200.50, 75.99, 450.00, 49.90]}
+
+df_inventario = pd.<span class="code-placeholder" id="step3-part1" contenteditable="true">[...]</span>(inventario_dict) <span class="code-comment"># Rellena: Función para crear el DataFrame</span>
+print("DataFrame de Inventario:")
+print(df_inventario)</pre></div><button class="action-button" onclick="checkStep(3)">Comprobar Paso</button><div id="step3-feedback" class="feedback-area"></div></div>
+
+        <div class="workshop-step" id="step4"><div class="step-title">Paso 4: Crear DataFrame de Ventas con Fechas</div><div class="step-description">Crea otro DataFrame `df_ventas` con datos de ventas, usando `pd.to_datetime` para crear un índice de fechas.</div><div class="code-container"><pre>import pandas as pd
+ventas_data = {'Vendedor': ['Carlos', 'Sofia', 'Carlos'], 'Monto': [550, 720, 480]}
+fechas_idx = pd.to_datetime(['2025-04-14', '2025-04-14', '2025-04-15'])
+
+df_ventas = pd.DataFrame(ventas_data, index=<span class="code-placeholder" id="step4-part1" contenteditable="true">[...]</span>) <span class="code-comment"># Rellena: Usa las fechas como índice</span>
+print("DataFrame de Ventas:")
+print(df_ventas)</pre></div><button class="action-button" onclick="checkStep(4)">Comprobar Paso</button><div id="step4-feedback" class="feedback-area"></div></div>
+
+        <div class="workshop-step" id="step5"><div class="step-title">Paso 5: Inspeccionar Forma (Shape)</div><div class="step-description">Verifica las dimensiones (filas, columnas) del DataFrame `df_inventario`.</div><div class="code-container"><pre># (Continuación del Paso 3)
+# df_inventario = pd.DataFrame({'ProductoID':..., 'Nombre':..., 'Stock':..., 'PrecioUnitario':...})
+
+dimensiones = df_inventario.<span class="code-placeholder" id="step5-part1" contenteditable="true">[...]</span> <span class="code-comment"># Rellena: Atributo de forma</span>
+print(f"El DataFrame de inventario tiene {dimensiones[0]} filas y {dimensiones[1]} columnas.")</pre></div><button class="action-button" onclick="checkStep(5)">Comprobar Paso</button><div id="step5-feedback" class="feedback-area"></div></div>
+
+        <div class="workshop-step" id="step6"><div class="step-title">Paso 6: Inspeccionar Tipos de Datos (dtypes)</div><div class="step-description">Revisa los tipos de datos de cada columna en el DataFrame `df_inventario`.</div><div class="code-container"><pre># (Continuación del Paso 3)
+# df_inventario = pd.DataFrame({'ProductoID':..., 'Nombre':..., 'Stock':..., 'PrecioUnitario':...})
+
+tipos_de_datos = df_inventario.<span class="code-placeholder" id="step6-part1" contenteditable="true">[...]</span> <span class="code-comment"># Rellena: Atributo para ver los tipos de datos</span>
+print("Tipos de datos del inventario:")
+print(tipos_de_datos)</pre></div><button class="action-button" onclick="checkStep(6)">Comprobar Paso</button><div id="step6-feedback" class="feedback-area"></div></div>
+
+        <h3 class="section-title">2. Guardar y Leer Datos</h3>
+
+        <div class="workshop-step" id="step7"><div class="step-title">Paso 7: Guardar Inventario a CSV</div><div class="step-description">Guarda `df_inventario` a `inventario_completo.csv` sin incluir el índice.</div><div class="code-container"><pre># (Continuación del Paso 3)
+# df_inventario = pd.DataFrame(...)
+
+df_inventario.<span class="code-placeholder" id="step7-part1" contenteditable="true">[...]</span>('inventario_completo.csv', index=False) <span class="code-comment"># Rellena: Método para guardar a CSV</span>
+print("Inventario guardado en inventario_completo.csv")</pre></div><button class="action-button" onclick="checkStep(7)">Comprobar Paso</button><div id="step7-feedback" class="feedback-area"></div></div>
+
+        <div class="workshop-step" id="step8"><div class="step-title">Paso 8: Leer Inventario desde CSV</div><div class="step-description">Carga los datos desde `inventario_completo.csv` a un nuevo DataFrame `df_inventario_cargado`.</div><div class="code-container"><pre>import pandas as pd
+# Asume que inventario_completo.csv existe
+
+df_inventario_cargado = pd.<span class="code-placeholder" id="step8-part1" contenteditable="true">[...]</span>('inventario_completo.csv') <span class="code-comment"># Rellena: Función para leer CSV</span>
+print("Inventario cargado desde CSV (primeras filas):")
+print(df_inventario_cargado.head(2))</pre></div><button class="action-button" onclick="checkStep(8)">Comprobar Paso</button><div id="step8-feedback" class="feedback-area"></div></div>
+
+        <div class="workshop-step" id="step9"><div class="step-title">Paso 9: Guardar Ventas a Excel</div><div class="step-description">Guarda `df_ventas` (del paso 4) a `reporte_ventas.xlsx`, hoja 'Abril'. Guarda el índice esta vez.</div><div class="code-container"><pre># (Continuación del Paso 4)
+# df_ventas = pd.DataFrame(...) con índice de fechas
+
+df_ventas.<span class="code-placeholder" id="step9-part1" contenteditable="true">[...]</span>('reporte_ventas.xlsx', sheet_name='Abril', index=True) <span class="code-comment"># Rellena: Método para guardar a Excel (index=True es el default)</span>
+print("Ventas guardadas en reporte_ventas.xlsx")</pre></div><button class="action-button" onclick="checkStep(9)">Comprobar Paso</button><div id="step9-feedback" class="feedback-area"></div></div>
+
+        <div class="workshop-step" id="step10"><div class="step-title">Paso 10: Leer Ventas desde Excel</div><div class="step-description">Lee la hoja 'Abril' de `reporte_ventas.xlsx`. Indica qué columna usar como índice (`index_col=0`).</div><div class="code-container"><pre>import pandas as pd
+# Asume que reporte_ventas.xlsx existe
+
+df_ventas_cargado = pd.<span class="code-placeholder" id="step10-part1" contenteditable="true">[...]</span>('reporte_ventas.xlsx', sheet_name='Abril', index_col=0) <span class="code-comment"># Rellena: Función para leer Excel, especificando columna índice</span>
+print("Ventas cargadas desde Excel:")
+print(df_ventas_cargado)</pre></div><button class="action-button" onclick="checkStep(10)">Comprobar Paso</button><div id="step10-feedback" class="feedback-area"></div></div>
+
+        <h3 class="section-title">3. Selección e Inspección Básica</h3>
+
+        <div class="workshop-step" id="step11"><div class="step-title">Paso 11: Ver Cabecera del Inventario</div><div class="step-description">Muestra las primeras 3 filas de `df_inventario`.</div><div class="code-container"><pre># (Continuación del Paso 3)
+# df_inventario = pd.DataFrame(...)
+
+print("Primeras 3 filas del inventario:")
+print(df_inventario.<span class="code-placeholder" id="step11-part1" contenteditable="true">[...]</span>(3)) <span class="code-comment"># Rellena: Método head()</span></pre></div><button class="action-button" onclick="checkStep(11)">Comprobar Paso</button><div id="step11-feedback" class="feedback-area"></div></div>
+
+        <div class="workshop-step" id="step12"><div class="step-title">Paso 12: Ver Cola de Ventas</div><div class="step-description">Muestra las últimas 2 filas de `df_ventas`.</div><div class="code-container"><pre># (Continuación del Paso 4)
+# df_ventas = pd.DataFrame(...)
+
+print("Últimas 2 filas de ventas:")
+print(df_ventas.<span class="code-placeholder" id="step12-part1" contenteditable="true">[...]</span>(2)) <span class="code-comment"># Rellena: Método tail()</span></pre></div><button class="action-button" onclick="checkStep(12)">Comprobar Paso</button><div id="step12-feedback" class="feedback-area"></div></div>
+
+        <div class="workshop-step" id="step13"><div class="step-title">Paso 13: Seleccionar Columna 'ProductoID'</div><div class="step-description">Extrae solo la columna 'ProductoID' de `df_inventario`.</div><div class="code-container"><pre># (Continuación del Paso 3)
+# df_inventario = pd.DataFrame(...)
+
+ids_productos = df_inventario<span class="code-placeholder" id="step13-part1" contenteditable="true">[...]</span> <span class="code-comment"># Rellena: Selecciona la columna 'ProductoID'</span>
+print("IDs de Productos:")
+print(ids_productos)</pre></div><button class="action-button" onclick="checkStep(13)">Comprobar Paso</button><div id="step13-feedback" class="feedback-area"></div></div>
+
+        <div class="workshop-step" id="step14"><div class="step-title">Paso 14: Seleccionar Columnas 'Vendedor' y 'Monto'</div><div class="step-description">Crea un nuevo DataFrame seleccionando solo las columnas 'Vendedor' y 'Monto' de `df_ventas`.</div><div class="code-container"><pre># (Continuación del Paso 4)
+# df_ventas = pd.DataFrame(...)
+
+ventas_resumen = df_ventas<span class="code-placeholder" id="step14-part1" contenteditable="true">[...]</span> <span class="code-comment"># Rellena: Usa una lista para seleccionar ['Vendedor', 'Monto']</span>
+print("Resumen de Ventas (Vendedor y Monto):")
+print(ventas_resumen)</pre></div><button class="action-button" onclick="checkStep(14)">Comprobar Paso</button><div id="step14-feedback" class="feedback-area"></div></div>
+
+        <div class="workshop-step" id="step15"><div class="step-title">Paso 15: Listar Columnas del Inventario</div><div class="step-description">Obtén la lista de todos los nombres de columnas en `df_inventario`.</div><div class="code-container"><pre># (Continuación del Paso 3)
+# df_inventario = pd.DataFrame(...)
+
+nombres_columnas_inv = df_inventario.<span class="code-placeholder" id="step15-part1" contenteditable="true">[...]</span> <span class="code-comment"># Rellena: Atributo para obtener columnas</span>
+print("Columnas del inventario:")
+print(nombres_columnas_inv)</pre></div><button class="action-button" onclick="checkStep(15)">Comprobar Paso</button><div id="step15-feedback" class="feedback-area"></div></div>
+
+        <h3 class="section-title">4. Filtrado de Datos</h3>
+
+        <div class="workshop-step" id="step16"><div class="step-title">Paso 16: Filtrar Inventario por Stock Bajo</div><div class="step-description">Encuentra los productos en `df_inventario` cuyo 'Stock' sea menor a 50 unidades.</div><div class="code-container"><pre># (Continuación del Paso 3)
+# df_inventario = pd.DataFrame(...)
+
+stock_bajo = df_inventario[df_inventario['Stock'] <span class="code-placeholder" id="step16-part1" contenteditable="true">[...]</span> 50] <span class="code-comment"># Rellena: Operador de comparación '<'</span>
+print("Productos con Stock bajo (< 50):")
+print(stock_bajo)</pre></div><button class="action-button" onclick="checkStep(16)">Comprobar Paso</button><div id="step16-feedback" class="feedback-area"></div></div>
+
+        <div class="workshop-step" id="step17"><div class="step-title">Paso 17: Filtrar Ventas por Vendedor</div><div class="step-description">Selecciona todas las ventas realizadas por 'Carlos' en `df_ventas`.</div><div class="code-container"><pre># (Continuación del Paso 4)
+# df_ventas = pd.DataFrame(...)
+
+ventas_carlos = df_ventas[df_ventas['Vendedor'] <span class="code-placeholder" id="step17-part1" contenteditable="true">[...]</span> 'Carlos'] <span class="code-comment"># Rellena: Operador de igualdad '=='</span>
+print("Ventas de Carlos:")
+print(ventas_carlos)</pre></div><button class="action-button" onclick="checkStep(17)">Comprobar Paso</button><div id="step17-feedback" class="feedback-area"></div></div>
+
+        <div class="workshop-step" id="step18"><div class="step-title">Paso 18: Filtrar Inventario con AND</div><div class="step-description">Encuentra los productos en `df_inventario` que tengan un 'PrecioUnitario' mayor a 100 **y** un 'Stock' mayor o igual a 50.</div><div class="code-container"><pre># (Continuación del Paso 3)
+# df_inventario = pd.DataFrame(...)
+
+filtro_inventario_and = df_inventario[(df_inventario['PrecioUnitario'] > 100) <span class="code-placeholder" id="step18-part1" contenteditable="true">[...]</span> (df_inventario['Stock'] >= 50)] <span class="code-comment"># Rellena: Operador lógico AND '&'</span>
+print("Inventario (Precio > 100 Y Stock >= 50):")
+print(filtro_inventario_and)</pre></div><button class="action-button" onclick="checkStep(18)">Comprobar Paso</button><div id="step18-feedback" class="feedback-area"></div></div>
+
+        <div class="workshop-step" id="step19"><div class="step-title">Paso 19: Filtrar Ventas con OR</div><div class="step-description">Selecciona las ventas en `df_ventas` realizadas por 'Sofia' **o** cuyo 'Monto' sea menor a 500.</div><div class="code-container"><pre># (Continuación del Paso 4)
+# df_ventas = pd.DataFrame(...)
+
+filtro_ventas_or = df_ventas[(df_ventas['Vendedor'] == 'Sofia') <span class="code-placeholder" id="step19-part1" contenteditable="true">[...]</span> (df_ventas['Monto'] < 500)] <span class="code-comment"># Rellena: Operador lógico OR '|'</span>
+print("Ventas (Sofia O Monto < 500):")
+print(filtro_ventas_or)</pre></div><button class="action-button" onclick="checkStep(19)">Comprobar Paso</button><div id="step19-feedback" class="feedback-area"></div></div>
+
+        <div class="workshop-step" id="step20"><div class="step-title">Paso 20: Filtrar Inventario con `.isin()`</div><div class="step-description">Selecciona los productos de `df_inventario` cuyos 'ProductoID' estén en la lista `ids_buscar`.</div><div class="code-container"><pre># (Continuación del Paso 3)
+# df_inventario = pd.DataFrame(...)
+ids_buscar = ['E001', 'E003']
+
+filtro_inventario_isin = df_inventario[df_inventario['ProductoID'].<span class="code-placeholder" id="step20-part1" contenteditable="true">[...]</span>(ids_buscar)] <span class="code-comment"># Rellena: Método isin()</span>
+print("Inventario para IDs E001 y E003:")
+print(filtro_inventario_isin)</pre></div><button class="action-button" onclick="checkStep(20)">Comprobar Paso</button><div id="step20-feedback" class="feedback-area"></div></div>
+
+         <div class="workshop-step" id="step21"><div class="step-title">Paso 21: Filtrar por Inicio de Texto</div><div class="step-description">En `df_inventario`, selecciona los productos cuyo 'Nombre' empiece con "Laptop" o "Monitor".</div><div class="code-container"><pre># (Continuación del Paso 3)
+# df_inventario = pd.DataFrame(...)
+
+filtro_texto_inicio = df_inventario[df_inventario['Nombre'].str.<span class="code-placeholder" id="step21-part1" contenteditable="true">[...]</span>('Laptop|Monitor')] <span class="code-comment"># Rellena: Método string para verificar si empieza con un patrón</span>
+print("Productos que empiezan con Laptop o Monitor:")
+print(filtro_texto_inicio)</pre></div><button class="action-button" onclick="checkStep(21)">Comprobar Paso</button><div id="step21-feedback" class="feedback-area"></div></div>
+
+        <div class="workshop-step" id="step22"><div class="step-title">Paso 22: Filtrar Inventario con `.query()`</div><div class="step-description">Usa `.query()` en `df_inventario` para encontrar productos con `Stock > 50` y `PrecioUnitario < 100`.</div><div class="code-container"><pre># (Continuación del Paso 3)
+# df_inventario = pd.DataFrame(...)
+
+filtro_inventario_query = df_inventario.<span class="code-placeholder" id="step22-part1" contenteditable="true">[...]</span>('Stock > 50 and PrecioUnitario < 100') <span class="code-comment"># Rellena: Método query()</span>
+print("Inventario con query (Stock > 50 y Precio < 100):")
+print(filtro_inventario_query)</pre></div><button class="action-button" onclick="checkStep(22)">Comprobar Paso</button><div id="step22-feedback" class="feedback-area"></div></div>
+
+        <h3 class="section-title">5. Operaciones con Columnas y Filas</h3>
+
+        <div class="workshop-step" id="step23"><div class="step-title">Paso 23: Calcular Valor Total del Stock</div><div class="step-description">En `df_inventario`, crea una nueva columna 'ValorTotal' multiplicando 'Stock' por 'PrecioUnitario'.</div><div class="code-container"><pre># (Continuación del Paso 3)
+# df_inventario = pd.DataFrame(...)
+
+df_inventario['ValorTotal'] = df_inventario['Stock'] <span class="code-placeholder" id="step23-part1" contenteditable="true">[...]</span> df_inventario['PrecioUnitario'] <span class="code-comment"># Rellena: Operador de multiplicación '*'</span>
+print("Inventario con Valor Total:")
+print(df_inventario[['Nombre', 'ValorTotal']])</pre></div><button class="action-button" onclick="checkStep(23)">Comprobar Paso</button><div id="step23-feedback" class="feedback-area"></div></div>
+
+        <div class="workshop-step" id="step24"><div class="step-title">Paso 24: Calcular Comisión de Venta</div><div class="step-description">En `df_ventas`, crea una columna 'Comision' que sea el 10% del 'Monto' de la venta.</div><div class="code-container"><pre># (Continuación del Paso 4)
+# df_ventas = pd.DataFrame(...)
+
+df_ventas['Comision'] = df_ventas['Monto'] * <span class="code-placeholder" id="step24-part1" contenteditable="true">[...]</span> <span class="code-comment"># Rellena: El valor decimal para el 10% (0.10)</span>
+print("Ventas con Comisión:")
+print(df_ventas)</pre></div><button class="action-button" onclick="checkStep(24)">Comprobar Paso</button><div id="step24-feedback" class="feedback-area"></div></div>
+
+        <div class="workshop-step" id="step25"><div class="step-title">Paso 25: Categorizar Precio con `.apply()`</div><div class="step-description">En `df_inventario`, crea una columna 'RangoPrecio' ('Barato' si < 100, 'Caro' si >= 100) usando `.apply()`.</div><div class="code-container"><pre># (Continuación del Paso 3)
+# df_inventario = pd.DataFrame(...)
+def categorizar_precio(precio):
+    if precio < 100: return 'Barato'
+    else: return 'Caro'
+
+df_inventario['RangoPrecio'] = df_inventario['PrecioUnitario'].<span class="code-placeholder" id="step25-part1" contenteditable="true">[...]</span>(categorizar_precio) <span class="code-comment"># Rellena: Método apply()</span>
+print("Inventario con Rango de Precio:")
+print(df_inventario[['Nombre', 'PrecioUnitario', 'RangoPrecio']])</pre></div><button class="action-button" onclick="checkStep(25)">Comprobar Paso</button><div id="step25-feedback" class="feedback-area"></div></div>
+
+        <div class="workshop-step" id="step26"><div class="step-title">Paso 26: Convertir Nombres a Mayúsculas</div><div class="step-description">En `df_inventario`, convierte todos los 'Nombre' de producto a mayúsculas usando el accesor `.str`.</div><div class="code-container"><pre># (Continuación del Paso 3)
+# df_inventario = pd.DataFrame(...)
+
+df_inventario['NombreMayus'] = df_inventario['Nombre'].str.<span class="code-placeholder" id="step26-part1" contenteditable="true">[...]</span>() <span class="code-comment"># Rellena: Método string para convertir a mayúsculas</span>
+print("Inventario con Nombres en Mayúsculas:")
+print(df_inventario[['NombreMayus']])</pre></div><button class="action-button" onclick="checkStep(26)">Comprobar Paso</button><div id="step26-feedback" class="feedback-area"></div></div>
+
+        <div class="workshop-step" id="step27"><div class="step-title">Paso 27: Seleccionar por Etiqueta de Índice (`.loc`)</div><div class="step-description">Usa `df_ventas` (con índice de fecha). Selecciona la venta del '2025-04-15'.</div><div class="code-container"><pre># (Continuación del Paso 4)
+# df_ventas = pd.DataFrame(...) con índice de fechas
+
+venta_especifica = df_ventas.<span class="code-placeholder" id="step27-part1" contenteditable="true">[...]</span>['2025-04-15'] <span class="code-comment"># Rellena: Selección por etiqueta con .loc</span>
+print("Venta del 2025-04-15:")
+print(venta_especifica)</pre></div><button class="action-button" onclick="checkStep(27)">Comprobar Paso</button><div id="step27-feedback" class="feedback-area"></div></div>
+
+        <div class="workshop-step" id="step28"><div class="step-title">Paso 28: Seleccionar por Posición de Fila (`.iloc`)</div><div class="step-description">En `df_inventario`, selecciona el producto que está en la *tercera* fila (índice de posición 2).</div><div class="code-container"><pre># (Continuación del Paso 3)
+# df_inventario = pd.DataFrame(...)
+
+tercer_producto = df_inventario.<span class="code-placeholder" id="step28-part1" contenteditable="true">[...]</span>[2] <span class="code-comment"># Rellena: Selección por posición con .iloc</span>
+print("Tercer producto en el inventario:")
+print(tercer_producto)</pre></div><button class="action-button" onclick="checkStep(28)">Comprobar Paso</button><div id="step28-feedback" class="feedback-area"></div></div>
+
+        <div class="workshop-step" id="step29"><div class="step-title">Paso 29: Seleccionar Filas y Columnas Específicas (`.loc`)</div><div class="step-description">De `df_inventario`, obtén el 'Nombre' y 'Stock' para los productos en las filas con índice 0 y 3.</div><div class="code-container"><pre># (Continuación del Paso 3)
+# df_inventario = pd.DataFrame(...)
+
+seleccion_especifica = df_inventario.<span class="code-placeholder" id="step29-part1" contenteditable="true">[...]</span>[[0, 3], ['Nombre', 'Stock']] <span class="code-comment"># Rellena: Selección .loc[filas, columnas]</span>
+print("Nombre y Stock para filas 0 y 3:")
+print(seleccion_especifica)</pre></div><button class="action-button" onclick="checkStep(29)">Comprobar Paso</button><div id="step29-feedback" class="feedback-area"></div></div>
+
+        <div class="workshop-step" id="step30"><div class="step-title">Paso 30: Seleccionar Filas por Condición del Índice</div><div class="step-description">De `df_inventario` (que tiene índice 0, 1, 2, 3...), selecciona las filas cuyo índice sea mayor que 1.</div><div class="code-container"><pre># (Continuación del Paso 3)
+# df_inventario = pd.DataFrame(...)
+
+filtro_indice = df_inventario[df_inventario.<span class="code-placeholder" id="step30-part1" contenteditable="true">[...]</span> > 1] <span class="code-comment"># Rellena: Accede al índice del DataFrame</span>
+print("Filas con índice > 1:")
+print(filtro_indice)</pre></div><button class="action-button" onclick="checkStep(30)">Comprobar Paso</button><div id="step30-feedback" class="feedback-area"></div></div>
+
+        <h3 class="section-title" style="text-align: center; border-bottom: none; margin-top: 50px;">¡Taller Completado!</h3>
+        <p style="text-align: center; font-size: 1.1em;">¡Muy bien! Has practicado diversas operaciones fundamentales con Pandas. ¡Sigue explorando!</p>
+
+    </div>
+
+    <script>
+        // Respuestas correctas para cada paso
+        const correctAnswers = {
+            step1: ["import", "as"],
+            step2: ["print"],
+            step3: ["DataFrame"],
+            step4: ["fechas_idx"],
+            step5: ["shape"],
+            step6: ["dtypes"],
+            step7: ["to_csv"], // index=False ya está
+            step8: ["read_csv"],
+            step9: ["to_excel"], // index=True ya está
+            step10: ["read_excel"], // index_col=0 ya está
+            step11: ["head"],
+            step12: ["tail"],
+            step13: ["['ProductoID']"], // Permitir comillas simples
+            step14: ["[['Vendedor', 'Monto']]"], // Permitir comillas simples
+            step15: ["columns"],
+            step16: ["<"],
+            step17: ["=="],
+            step18: ["&"],
+            step19: ["|"],
+            step20: ["isin"],
+            step21: ["startswith"],
+            step22: ["query"],
+            step23: ["*"],
+            step24: ["0.10"], // o 0.1
+            step25: ["apply"],
+            step26: ["upper"],
+            step27: ["loc"],
+            step28: ["iloc"],
+            step29: ["loc"],
+            step30: ["index"]
+        };
+
+        const verifiedSteps = {};
+
+        // Función para verificar un paso y dar feedback/guía
+        function checkStep(stepNumber) {
+            const stepId = `step${stepNumber}`;
+            const feedbackDiv = document.getElementById(`${stepId}-feedback`);
+            feedbackDiv.innerHTML = "";
+            feedbackDiv.className = 'feedback-area';
+
+            let allCorrect = true;
+            let correctCount = 0;
+            const correctAnswersList = correctAnswers[stepId];
+            const totalParts = correctAnswersList.length;
+
+            for (let i = 1; i <= totalParts; i++) {
+                const partId = `${stepId}-part${i}`;
+                const placeholder = document.getElementById(partId);
+                 if (!placeholder) { console.error(`Placeholder ${partId} no encontrado.`); continue; }
+                const userAnswer = placeholder.textContent.trim();
+                let correctAnswer = correctAnswersList[i-1];
+
+                placeholder.classList.remove("correct", "incorrect");
+
+                let normalizedUserAnswer = userAnswer;
+                let normalizedCorrectAnswer = correctAnswer;
+
+                 // Normalizaciones
+                 if (['step13', 'step14'].includes(stepId)) { // Column selection
+                     normalizedUserAnswer = userAnswer.replace(/'/g, '"');
+                     normalizedCorrectAnswer = correctAnswer.replace(/'/g, '"');
+                 }
+                 if (stepId === 'step24' && normalizedUserAnswer === '0.1') { // Allow 0.1 for 0.10
+                     normalizedUserAnswer = '0.10';
+                 }
+                 if (!correctAnswer.endsWith("()") && !['<', '==', '&', '|', '*', '/'].includes(correctAnswer)) { // Attributes vs methods
+                     normalizedUserAnswer = userAnswer.replace(/\(\)$/, '');
+                 }
+
+
+                if (normalizedUserAnswer === normalizedCorrectAnswer) {
+                    placeholder.classList.add("correct");
+                    correctCount++;
+                } else {
+                    placeholder.classList.add("incorrect");
+                    allCorrect = false;
+                }
+            }
+
+            verifiedSteps[stepId] = allCorrect;
+
+            // Mostrar retroalimentación/guía
+             if (allCorrect) {
+                feedbackDiv.classList.add('correct-feedback');
+                let explanation = "¡Correcto! Paso completado.";
+                // Explicaciones adicionales
+                if (stepId === 'step4') explanation += " Usar fechas como índice es común en series temporales.";
+                if (stepId === 'step8') explanation += " `read_csv` es fundamental para importar datos.";
+                if (stepId === 'step10') explanation += " `index_col` es importante al leer Excel si guardaste el índice.";
+                if (stepId === 'step21') explanation += " El accesor `.str` te da acceso a métodos de texto.";
+                if (stepId === 'step25') explanation += " `.apply()` es poderoso para lógica personalizada.";
+                if (stepId === 'step30') explanation += " También puedes filtrar usando el índice directamente.";
+
+                feedbackDiv.innerHTML = `<strong>${explanation}</strong>`;
+
+            } else {
+                 feedbackDiv.classList.add('incorrect-feedback');
+                 let hint = "Hay algo por corregir.";
+                 // Pistas específicas
+                 if (stepId === 'step18' || stepId === 'step19') hint = "Revisa los paréntesis `()` para cada condición y el operador lógico (`&` o `|`).";
+                 else if (stepId === 'step14') hint = "Para seleccionar múltiples columnas, usa una lista de nombres `[['Col1', 'Col2']]`.";
+                 else if (stepId === 'step21') hint = "Busca el método string que verifica si un texto *empieza* con algo.";
+                 else if (stepId === 'step26') hint = "Busca el método string para convertir a mayúsculas.";
+                 else if (stepId === 'step30') hint = "Puedes acceder al índice de un DataFrame con el atributo `.index`.";
+                 else hint = "Verifica el nombre del método, atributo u operador.";
+
+                 feedbackDiv.innerHTML = `<strong>Sugerencia:</strong> ${hint} Revisa el código e inténtalo de nuevo.`;
+            }
+        }
+
+
+        // Hacer que los placeholders sean editables
+        document.querySelectorAll('.code-placeholder').forEach(placeholder => {
+            placeholder.dataset.placeholder = '[...]';
+            placeholder.addEventListener('focus', function() { if (this.textContent === this.dataset.placeholder) { this.textContent = ""; } this.style.minWidth = '40px'; });
+            placeholder.addEventListener('blur', function() { if (this.textContent.trim() === "") { this.textContent = this.dataset.placeholder; } this.style.minWidth = '20px'; });
+            if (placeholder.textContent.trim() === '') { placeholder.textContent = placeholder.dataset.placeholder; }
+        });
+
+    </script>
+</body>
+</html>
